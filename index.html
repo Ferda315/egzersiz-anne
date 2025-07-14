@@ -3,7 +3,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Anne İçin Egzersiz Programı</title>
+  <title>Anne İçin Egzersiz Programı (Video)</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -24,6 +24,7 @@
       margin-bottom: 30px;
     }
     .exercise {
+      cursor: pointer;
       display: flex;
       align-items: center;
       padding: 10px;
@@ -31,12 +32,22 @@
       background-color: #f9f9f9;
       border-left: 5px solid #6c63ff;
       border-radius: 8px;
+      transition: background-color 0.3s;
     }
-    .exercise img {
-      width: 120px;
-      height: auto;
-      margin-right: 20px;
+    .exercise:hover {
+      background-color: #e6e6ff;
+    }
+    .exercise .preview {
+      width: 80px;
+      height: 80px;
+      background-color: #dcdcdc;
       border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-right: 20px;
+      color: #6c63ff;
     }
     .details {
       flex: 1;
@@ -45,6 +56,42 @@
       font-size: 0.9em;
       color: #666;
     }
+    /* Modal CSS */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .modal-content video {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: black;
+    }
   </style>
 </head>
 <body>
@@ -52,8 +99,8 @@
 <div class="day">
 <h2>Pazartesi (Ön Kol &amp; Omuz Başlangıç)</h2>
 
-        <div class="exercise">
-            <img src="https://tenor.com/view/bodbuilding-biceps-gym-fit-girl-gif-21793608" alt="Dumbbell Biceps Curl">
+        <div class="exercise" onclick="openModal('modal0')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Dumbbell Biceps Curl</strong><br>
               2x20 tekrar<br>
@@ -61,8 +108,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Lateral Raise">
+        <div class="exercise" onclick="openModal('modal1')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Lateral Raise</strong><br>
               3x20 tekrar<br>
@@ -70,8 +117,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Front Raise">
+        <div class="exercise" onclick="openModal('modal2')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Front Raise</strong><br>
               2x10 tekrar<br>
@@ -79,8 +126,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Wall Push-up">
+        <div class="exercise" onclick="openModal('modal3')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Wall Push-up</strong><br>
               2x10 tekrar<br>
@@ -91,8 +138,8 @@
 <div class="day">
 <h2>Salı (Arka Kol &amp; Omuz)</h2>
 
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Triceps Kickback">
+        <div class="exercise" onclick="openModal('modal4')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Triceps Kickback</strong><br>
               3x10 tekrar<br>
@@ -100,8 +147,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Overhead Dumbbell Extension">
+        <div class="exercise" onclick="openModal('modal5')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Overhead Dumbbell Extension</strong><br>
               3x10 tekrar<br>
@@ -109,8 +156,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Shoulder Press Dumbell (Oturarak)">
+        <div class="exercise" onclick="openModal('modal6')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Shoulder Press Dumbell (Oturarak)</strong><br>
               2x15 tekrar<br>
@@ -118,8 +165,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Arm Circles">
+        <div class="exercise" onclick="openModal('modal7')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Arm Circles</strong><br>
               2x15 tekrar<br>
@@ -130,8 +177,8 @@
 <div class="day">
 <h2>Çarşamba (Dinlenme / Aktif Dinlenme)</h2>
 
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Hafif yürüyüş">
+        <div class="exercise" onclick="openModal('modal8')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Hafif yürüyüş</strong><br>
               <br>
@@ -139,8 +186,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Esneme hareketleri">
+        <div class="exercise" onclick="openModal('modal9')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Esneme hareketleri</strong><br>
               <br>
@@ -151,8 +198,8 @@
 <div class="day">
 <h2>Perşembe (Kol + Omuz)</h2>
 
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Hammer Curl">
+        <div class="exercise" onclick="openModal('modal10')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Hammer Curl</strong><br>
               3x10 tekrar<br>
@@ -160,8 +207,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Upright Row">
+        <div class="exercise" onclick="openModal('modal11')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Upright Row</strong><br>
               2x10 tekrar<br>
@@ -169,8 +216,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Dumbbell Shrug">
+        <div class="exercise" onclick="openModal('modal12')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Dumbbell Shrug</strong><br>
               3x15 tekrar<br>
@@ -178,8 +225,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Wall Push-up">
+        <div class="exercise" onclick="openModal('modal13')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Wall Push-up</strong><br>
               2x15 tekrar<br>
@@ -190,8 +237,8 @@
 <div class="day">
 <h2>Cuma (Esneme + Form Geliştirme)</h2>
 
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Lateral Raise (Kontrollü)">
+        <div class="exercise" onclick="openModal('modal14')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Lateral Raise (Kontrollü)</strong><br>
               1x20 tekrar<br>
@@ -199,8 +246,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Triceps Dips (Sandalyeyle)">
+        <div class="exercise" onclick="openModal('modal15')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Triceps Dips (Sandalyeyle)</strong><br>
               1x10 tekrar<br>
@@ -208,8 +255,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Biceps Curl">
+        <div class="exercise" onclick="openModal('modal16')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Biceps Curl</strong><br>
               2x15 tekrar<br>
@@ -217,8 +264,8 @@
             </div>
         </div>
         
-        <div class="exercise">
-            <img src="https://media.tenor.com/JQZssY4kqDoAAAAd/exercise.gif" alt="Shoulder Rolls &amp; Esneme">
+        <div class="exercise" onclick="openModal('modal17')">
+            <div class="preview">▶</div>
             <div class="details">
               <strong>Shoulder Rolls &amp; Esneme</strong><br>
               2x20 tekrar<br>
@@ -227,5 +274,211 @@
         </div>
         </div>
 
+        <div id="modal0" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal0')">&times;</span>
+            <h3>Dumbbell Biceps Curl</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-curl-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h3>Lateral Raise</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-lateral-raise-side.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal2" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h3>Front Raise</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-front-raise-side.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal3" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h3>Push-up</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Bodyweight-push-up-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal4" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <h3>Triceps Kickback</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-dumbbell-tricep-kickback-side.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal5" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal5')">&times;</span>
+            <h3>Overhead Dumbbell Extension</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-overhead-tricep-extension-side.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal6" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal6')">&times;</span>
+            <h3>Shoulder Press Dumbell (Oturarak)</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-dumbbell-seated-overhead-press-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal7" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal7')">&times;</span>
+            <h3>Arm Circles</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Bodyweight-backward-arm-circle-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal8" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal8')">&times;</span>
+            <h3>Hafif yürüyüş</h3>
+            <video controls autoplay loop>
+              <source src="" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal9" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal9')">&times;</span>
+            <h3>Esneme hareketleri (Her hangi bişe olur)</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-lats-stretch-variation-1-side.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal10" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal10')">&times;</span>
+            <h3>Hammer Curl</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-hammer-curl-side.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal11" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal11')">&times;</span>
+            <h3>Upright Row</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-dumbbell-upright-row-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal12" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal12')">&times;</span>
+            <h3>Dumbbell Shrug</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-shrug-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal13" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal13')">&times;</span>
+            <h3>Band Shrug</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Band-band-shrug-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal14" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal14')">&times;</span>
+            <h3>Lateral Raise (Kontrollü)</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-lateral-raise-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal15" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal15')">&times;</span>
+            <h3>Triceps Dips (Sandalyeyle)</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Bodyweight-bench-dips-side.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal16" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal16')">&times;</span>
+            <h3>Biceps Curl</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-curl-front.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+        <div id="modal17" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeModal('modal17')">&times;</span>
+            <h3>Dumbell Full Latheral Raise &amp; Esneme</h3>
+            <video controls autoplay loop>
+              <source src="https://media.musclewiki.com/media/uploads/videos/branded/female-Dumbbells-dumbbell-full-lateral-raise-side.mp4" type="video/mp4">
+              Tarayıcınız video etiketini desteklemiyor.
+            </video>
+          </div>
+        </div>
+        
+<script>
+function openModal(id) {
+  document.getElementById(id).style.display = 'block';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+</script>
 </body>
 </html>
