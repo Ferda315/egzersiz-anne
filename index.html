@@ -92,9 +92,74 @@
     .close:hover {
       color: black;
     }
+    /* INTRO EKRANI */
+#intro {
+  position: fixed;
+  z-index: 9999;
+  background: black;
+  color: white;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 24px;
+}
+.glitch {
+  animation: glitch 1s steps(2, end) infinite;
+  color: #fff;
+  text-shadow:
+    0.05em 0 red,
+    -0.05em -0.025em blue,
+    0.025em 0.05em green;
+}
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, -1px); }
+  100% { transform: translate(0); }
+}
+#main-content {
+  display: none;
+}
   </style>
+
 </head>
+<script>
+  window.addEventListener('load', () => {
+    const intro = document.getElementById('intro');
+    const glitchText = document.getElementById('glitch-text');
+
+    setTimeout(() => {
+      glitchText.classList.remove('glitch');
+      glitchText.textContent = "İyi çalışmalar..";
+    }, 2500);
+
+    setTimeout(() => {
+      intro.style.transition = 'opacity 1s';
+      intro.style.opacity = '0';
+    }, 4000);
+
+    setTimeout(() => {
+      intro.style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+    }, 5000);
+  });
+</script>
+
 <body>
+  <div id="intro">
+  <div id="glitch-text" class="glitch">Bu site FERDA FIRAT DELİCE tarafından hazırlanmıştır</div>
+</div>
+
+<div id="main-content">
+
   <h1>Anne İçin Haftalık Egzersiz Programı</h1>
 <div class="day">
 <h2>Pazartesi (Ön Kol &amp; Omuz Başlangıç)</h2>
